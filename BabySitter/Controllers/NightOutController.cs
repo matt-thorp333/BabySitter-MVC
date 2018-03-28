@@ -6,8 +6,9 @@ using System.Web.Mvc;
 
 namespace BabySitter.Controllers
 {
-    public class HomeController : Controller
+    public class NightOutController : Controller
     {
+        // GET: NightOut
         public ActionResult Index()
         {
             return null;

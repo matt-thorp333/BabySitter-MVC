@@ -5,13 +5,13 @@ using BabySitter.Controllers;
 namespace BabySitter.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest
+    public class NightOutTest
     {
         [TestMethod]
-        public void HomeIndex()
+        public void NightOutIndex()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            NightOutController controller = new NightOutController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -19,6 +19,5 @@ namespace BabySitter.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-
     }
 }
