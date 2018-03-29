@@ -1,7 +1,25 @@
 ﻿@model BabySitter.Models.NightOut
 @{
     ViewBag.Title = "Night Out";
-}
+
+    var today = DateTime.Today;
+
+    ViewBag.StartTimes = new Dictionary<DateTime, string>
+        {
+                { today + new TimeSpan(17, 0, 0), " 5:00 PM"},
+                { today + new TimeSpan(18, 0, 0), " 6:00 PM"},
+                { today + new TimeSpan(19, 0, 0), " 7:00 PM"},
+                { today + new TimeSpan(20, 0, 0), " 8:00 PM"},
+                { today + new TimeSpan(21, 0, 0), " 9:00 PM"},
+                { today + new TimeSpan(22, 0, 0), "10:00 PM"},
+                { today + new TimeSpan(23, 0, 0), "11:00 PM"},
+                { today + new TimeSpan(24, 0, 0), "12:00 AM"},
+                { today + new TimeSpan(25, 0, 0), "1:00 AM"},
+                { today + new TimeSpan(26, 0, 0), "2:00 AM"},
+                { today + new TimeSpan(27, 0, 0), "3:00 AM"},
+                { today + new TimeSpan(28, 0, 0), "4:00 AM"}
+         };
+    }
 
 <div class="jumbotron">
     <h1>Night Out</h1>
@@ -24,13 +42,7 @@
                       })
 
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.StartTime, new
-                 {
-                     htmlAttributes = new
-                     {
-                         @class = "form-control"
-                     }
-                 })
+                    @Html.DropDownListFor(model => model.StartTime, new SelectList(ViewBag.StartTimes, "Key", "Value"))
 
                     @Html.ValidationMessageFor(model => model.StartTime, "", new
                  {
@@ -48,11 +60,8 @@
                       })
 
                 <div class="col-md-10">
-                    @Html.EditorFor(
-                         model => model.EndTime, new
-                         {
-                             htmlAttributes = new { @class = "form-control" }
-                         })
+                    @Html.DropDownListFor(model => model.EndTime, new SelectList(ViewBag.StartTimes, "Key", "Value"))
+
 
                     @Html.ValidationMessageFor(
                          model => model.EndTime, "", new
