@@ -12,14 +12,29 @@ namespace BabySitter.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection form)
         {
-            var startTime = form["StartTime"];
-            var endTime = form["EndTime"];
-            var bedTime = form["BedTime"];
+            var startTime = Convert.ToDateTime(form["StartTime"]);
+            var endTime = Convert.ToDateTime(form["EndTime"]);
+            var bedTime = Convert.ToDateTime(form["BedTime"]);
 
             //var awakePay = CalculateAwakePay();
             //var asleepPay = CalculateAsleepPay();
             //var latePay = CalculateLatePay();
             return null;
+        }
+
+        internal int CalculateAwakePay(DateTime startTime, DateTime bedTime)
+        {
+            return 0;
+        }
+
+        internal int CalculateAsleepPay(DateTime bedTime, DateTime endTime)
+        {
+            return 0;
+        }
+
+        internal int CalculateLatePay(DateTime startTime, DateTime endTime)
+        {
+            return 0;
         }
     }
 }

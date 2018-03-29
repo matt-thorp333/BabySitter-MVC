@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BabySitter.Controllers;
+using System;
 
 namespace BabySitter.Tests.Controllers
 {
@@ -10,14 +11,37 @@ namespace BabySitter.Tests.Controllers
         [TestMethod]
         public void NightOutIndex()
         {
-            // Arrange
             NightOutController controller = new NightOutController();
+            ViewResult result = controller.Index(new FormCollection()) as ViewResult;
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void TestAwakePay()
+        {
+            NightOutController controller = new NightOutController();
+            int result = controller.CalculateAwakePay(DateTime.Today + new TimeSpan(17, 0, 0), DateTime.Today + new TimeSpan(22, 0, 0));
+
+            Assert.IsTrue(result == 60);
+        }
+
+        [TestMethod]
+        public void TestAsleepPay()
+        {
+            NightOutController controller = new NightOutController();
+            int result = controller.CalculateAsleepPay(DateTime.Today + new TimeSpan(22, 0, 0), DateTime.Today + new TimeSpan(28, 0, 0));
+
+            Assert.IsTrue(result == 16);
+        }
+
+        [TestMethod]
+        public void TestLatePay()
+        {
+            NightOutController controller = new NightOutController();
+            int result = controller.CalculateAsleepPay(DateTime.Today + new TimeSpan(17, 0, 0), DateTime.Today + new TimeSpan(28, 0, 0));
+
+            Assert.IsTrue(result == 64);
         }
     }
 }
