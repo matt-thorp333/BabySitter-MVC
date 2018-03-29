@@ -10,7 +10,7 @@ namespace BabySitter.Controllers
     {
         public ActionResult Index()
         {
-            return null;
+            return View();
         }
     }
 }
