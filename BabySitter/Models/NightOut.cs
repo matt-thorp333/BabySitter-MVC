@@ -14,5 +14,8 @@ namespace BabySitter.Models
 
         [DisplayName("End Time")]
         public DateTime EndTime { get; set; }
+
+        [DisplayName("Bed Time")]
+        public DateTime BedTime { get; set; }
     }
 }
