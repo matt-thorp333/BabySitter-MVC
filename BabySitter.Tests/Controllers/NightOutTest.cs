@@ -30,7 +30,7 @@ namespace BabySitter.Tests.Controllers
         public void TestAsleepPay()
         {
             NightOutController controller = new NightOutController();
-            int result = controller.CalculateAsleepPay(DateTime.Today + new TimeSpan(22, 0, 0), DateTime.Today + new TimeSpan(28, 0, 0));
+            int result = controller.CalculateAsleepPay(DateTime.Today + new TimeSpan(22, 0, 0));
 
             Assert.IsTrue(result == 16);
         }
@@ -39,7 +39,7 @@ namespace BabySitter.Tests.Controllers
         public void TestLatePay()
         {
             NightOutController controller = new NightOutController();
-            int result = controller.CalculateAsleepPay(DateTime.Today + new TimeSpan(17, 0, 0), DateTime.Today + new TimeSpan(28, 0, 0));
+            int result = controller.CalculateLatePay(DateTime.Today + new TimeSpan(28, 0, 0));
 
             Assert.IsTrue(result == 64);
         }
