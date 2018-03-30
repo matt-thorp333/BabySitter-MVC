@@ -25,19 +25,19 @@ namespace BabySitter.Controllers
         internal int CalculateAwakePay(DateTime startTime, DateTime bedTime)
         {
             var hours = Convert.ToInt16(bedTime.Subtract(startTime).TotalHours);
-            return hours * 12;
+            return (hours < 1) ? 0 : hours * 12;
         }
 
         internal int CalculateAsleepPay(DateTime bedTime)
         {
             var hours = Convert.ToInt16(DateTime.Today.AddDays(1).Subtract(bedTime).TotalHours);
-            return hours * 8;
+            return (hours < 1) ? 0 : hours * 8;
         }
 
         internal int CalculateLatePay(DateTime endTime)
         {
             var hours = Convert.ToInt16(endTime.Subtract(DateTime.Today.AddDays(1)).TotalHours);
-            return hours * 16;
+            return (hours < 1) ? 0 : hours * 16;
         }
     }
 }
