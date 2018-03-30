@@ -70,5 +70,32 @@ namespace BabySitter.Tests.Controllers
 
             Assert.IsTrue(result == 0);
         }
+
+        [TestMethod]
+        public void TestAwakePay_Negative()
+        {
+            NightOutController controller = new NightOutController();
+            int result = controller.CalculateAwakePay(DateTime.Today + new TimeSpan(17, 0, 0), DateTime.Today + new TimeSpan(15, 0, 0));
+
+            Assert.IsTrue(result == 0);
+        }
+
+        [TestMethod]
+        public void TestAsleepPay_Negative()
+        {
+            NightOutController controller = new NightOutController();
+            int result = controller.CalculateAsleepPay(DateTime.Today + new TimeSpan(26, 0, 0));
+
+            Assert.IsTrue(result == 0);
+        }
+
+        [TestMethod]
+        public void TestLatePay_Negative()
+        {
+            NightOutController controller = new NightOutController();
+            int result = controller.CalculateLatePay(DateTime.Today + new TimeSpan(22, 0, 0));
+
+            Assert.IsTrue(result == 0);
+        }
     }
 }
