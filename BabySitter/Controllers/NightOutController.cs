@@ -39,8 +39,18 @@ namespace BabySitter.Controllers
             var endTime = Convert.ToDateTime(form["EndTime"]);
             var bedTime = Convert.ToDateTime(form["BedTime"]);
 
-            var awakePay = CalculateAwakePay(startTime, bedTime);
-            var asleepPay = CalculateAsleepPay(bedTime);
+            var awakePay = 0;
+            var asleepPay = 0;
+            if (bedTime < endTime)
+            {
+                awakePay = CalculateAwakePay(startTime, bedTime);
+                asleepPay = CalculateAsleepPay(bedTime);
+            }                
+            else
+            {
+                awakePay = CalculateAwakePay(startTime, endTime);
+            }
+                           
             var latePay = CalculateLatePay(endTime);
 
             return new NightOut_Result
