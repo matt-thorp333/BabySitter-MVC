@@ -97,5 +97,27 @@ namespace BabySitter.Tests.Controllers
 
             Assert.IsTrue(result == 0);
         }
+
+        [TestMethod]
+        public void TestBedTime_After_EndTime()
+        {
+            NightOutController controller = new NightOutController();
+
+            var startTime = DateTime.Today + new TimeSpan(17, 0, 0).ToString();
+            var endTime = DateTime.Today + new TimeSpan(19, 0, 0).ToString();
+            var bedTime = DateTime.Today + new TimeSpan(21, 0, 0).ToString();
+
+            var form = new FormCollection {
+                {"StartTime", startTime},
+                {"EndTime", endTime},
+                {"BedTime", bedTime}
+            };
+
+            var result = controller.CreateResultModel(form);
+
+            Assert.IsTrue(result.AwakePay == 16);
+            Assert.IsTrue(result.AsleepPay == 0);
+            Assert.IsTrue(result.LatePay == 0);
+        }
     }
 }

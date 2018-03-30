@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BabySitter.Models;
+using System;
 using System.Web.Mvc;
 
 namespace BabySitter.Controllers
@@ -12,13 +10,8 @@ namespace BabySitter.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection form)
         {
-            var startTime = Convert.ToDateTime(form["StartTime"]);
-            var endTime = Convert.ToDateTime(form["EndTime"]);
-            var bedTime = Convert.ToDateTime(form["BedTime"]);
+            var model = CreateResultModel(form);
 
-            //var awakePay = CalculateAwakePay();
-            //var asleepPay = CalculateAsleepPay();
-            //var latePay = CalculateLatePay();
             return null;
         }
 
@@ -38,6 +31,27 @@ namespace BabySitter.Controllers
         {
             var hours = Convert.ToInt16(endTime.Subtract(DateTime.Today.AddDays(1)).TotalHours);
             return (hours < 1) ? 0 : hours * 16;
+        }
+
+        internal NightOut_Result CreateResultModel(FormCollection form)
+        {
+            var startTime = Convert.ToDateTime(form["StartTime"]);
+            var endTime = Convert.ToDateTime(form["EndTime"]);
+            var bedTime = Convert.ToDateTime(form["BedTime"]);
+
+            var awakePay = CalculateAwakePay(startTime, bedTime);
+            var asleepPay = CalculateAsleepPay(bedTime);
+            var latePay = CalculateLatePay(endTime);
+
+            return new NightOut_Result
+            {
+                StartTime = startTime,
+                EndTime = endTime,
+                BedTime = bedTime,
+                AwakePay = awakePay,
+                AsleepPay = asleepPay,
+                LatePay = latePay
+            };
         }
     }
 }
