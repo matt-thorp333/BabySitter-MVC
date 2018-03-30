@@ -12,7 +12,7 @@ namespace BabySitter.Tests.Controllers
         public void NightOutIndex()
         {
             NightOutController controller = new NightOutController();
-            ViewResult result = controller.Index(new FormCollection()) as ViewResult;
+            ViewResult result = controller.Index(GetFormCollection()) as ViewResult;
 
             Assert.IsNotNull(result);
         }
@@ -101,8 +101,17 @@ namespace BabySitter.Tests.Controllers
         [TestMethod]
         public void TestBedTime_After_EndTime()
         {
-            NightOutController controller = new NightOutController();
+            NightOutController controller = new NightOutController();            
 
+            var result = controller.CreateResultModel(GetFormCollection());
+
+            Assert.IsTrue(result.AwakePay == 24);
+            Assert.IsTrue(result.AsleepPay == 0);
+            Assert.IsTrue(result.LatePay == 0);
+        }
+
+        private FormCollection GetFormCollection()
+        {
             var startTime = (DateTime.Today + new TimeSpan(17, 0, 0)).ToString();
             var endTime = (DateTime.Today + new TimeSpan(19, 0, 0)).ToString();
             var bedTime = (DateTime.Today + new TimeSpan(21, 0, 0)).ToString();
@@ -113,11 +122,7 @@ namespace BabySitter.Tests.Controllers
                 {"BedTime", bedTime}
             };
 
-            var result = controller.CreateResultModel(form);
-
-            Assert.IsTrue(result.AwakePay == 24);
-            Assert.IsTrue(result.AsleepPay == 0);
-            Assert.IsTrue(result.LatePay == 0);
+            return form;
         }
     }
 }

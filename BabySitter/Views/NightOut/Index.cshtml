@@ -1,0 +1,53 @@
+﻿@model BabySitter.Models.NightOut
+
+
+<div class="jumbotron">
+    <h1>Night Out</h1>
+    <h4>Babysitting pay-out calculator</h4>
+
+    <span>@Html.DisplayFor(model => model.StartTime) - @Html.DisplayFor(model => model.EndTime) (BedTime @Html.DisplayFor(model => model.BedTime))</span>    
+    <br />
+    @Html.ActionLink("Back to Calculator", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+</div>
+
+
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(
+                          model => model.AwakePay, htmlAttributes: new
+                          {
+                              @class = "control-label col-md-2"
+                          })
+
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.AwakePay)
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(
+                          model => model.AsleepPay, htmlAttributes: new
+                          {
+                              @class = "control-label col-md-2"
+                          })
+
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.AsleepPay)
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(
+                          model => model.LatePay, htmlAttributes: new
+                          {
+                              @class = "control-label col-md-2"
+                          })
+
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.LatePay)
+        </div>
+
+    </div>
+</div>

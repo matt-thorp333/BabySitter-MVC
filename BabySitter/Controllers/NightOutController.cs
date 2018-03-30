@@ -11,8 +11,7 @@ namespace BabySitter.Controllers
         public ActionResult Index(FormCollection form)
         {
             var model = CreateResultModel(form);
-
-            return null;
+            return View(model);
         }
 
         internal int CalculateAwakePay(DateTime startTime, DateTime bedTime)
@@ -33,7 +32,7 @@ namespace BabySitter.Controllers
             return (hours < 1) ? 0 : hours * 16;
         }
 
-        internal NightOut_Result CreateResultModel(FormCollection form)
+        internal NightOut CreateResultModel(FormCollection form)
         {
             var startTime = Convert.ToDateTime(form["StartTime"]);
             var endTime = Convert.ToDateTime(form["EndTime"]);
@@ -53,7 +52,7 @@ namespace BabySitter.Controllers
                            
             var latePay = CalculateLatePay(endTime);
 
-            return new NightOut_Result
+            return new NightOut
             {
                 StartTime = startTime,
                 EndTime = endTime,

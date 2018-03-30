@@ -4,7 +4,7 @@
 
     var today = DateTime.Today;
 
-    ViewBag.StartTimes = new Dictionary<DateTime, string>
+    ViewBag.AvailableTimes = new Dictionary<DateTime, string>
         {
                 { today + new TimeSpan(17, 0, 0), " 5:00 PM"},
                 { today + new TimeSpan(18, 0, 0), " 6:00 PM"},
@@ -42,32 +42,12 @@
                       })
 
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.StartTime, new SelectList(ViewBag.StartTimes, "Key", "Value"))
+                    @Html.DropDownListFor(model => model.StartTime, new SelectList(ViewBag.AvailableTimes, "Key", "Value"))
 
                     @Html.ValidationMessageFor(model => model.StartTime, "", new
                  {
                      @class = "text-danger"
                  })
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(
-                      model => model.EndTime, htmlAttributes: new
-                      {
-                          @class = "control-label col-md-2"
-                      })
-
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.EndTime, new SelectList(ViewBag.StartTimes, "Key", "Value"))
-
-
-                    @Html.ValidationMessageFor(
-                         model => model.EndTime, "", new
-                         {
-                             @class = "text-danger"
-                         })
                 </div>
 
             </div>
@@ -80,7 +60,7 @@
                       })
 
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.BedTime, new SelectList(ViewBag.StartTimes, "Key", "Value"))
+                    @Html.DropDownListFor(model => model.BedTime, new SelectList(ViewBag.AvailableTimes, "Key", "Value"))
 
 
                     @Html.ValidationMessageFor(
@@ -92,9 +72,29 @@
 
             </div>
 
-            </div>
+            <div class="form-group">
+                @Html.LabelFor(
+                      model => model.EndTime, htmlAttributes: new
+                      {
+                          @class = "control-label col-md-2"
+                      })
 
-            <p><input type="submit" class="btn btn-primary btn-lg" value="Calculate"></p>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.EndTime, new SelectList(ViewBag.AvailableTimes, "Key", "Value"))
+
+
+                    @Html.ValidationMessageFor(
+                         model => model.EndTime, "", new
+                         {
+                             @class = "text-danger"
+                         })
+                </div>
+
+            </div>            
+
+        </div>
+
+        <p><input type="submit" class="btn btn-primary btn-lg" value="Calculate"></p>
 
         }
     </div>
